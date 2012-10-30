@@ -1,20 +1,15 @@
 from django.conf.urls import patterns, include, url
 from django.contrib.auth.decorators import permission_required
-from views import EntryListView, LatestEntriesFeed, EntryCreate, EntryUpdate
-from django.views.generic import DetailView
-from models import Entry
-import api
+from views import EntryVisibleListView, EntryDetailView, LatestEntriesFeed, EntryCreate, EntryUpdate
 
 urlpatterns = patterns('blogalog.views', 
-    url(r'^$', EntryListView.as_view(
-            queryset=api.list_entries().order_by('-pub_date'),
+    url(r'^$', EntryVisibleListView.as_view(
             context_object_name='latest_blog_entries',
         ), 
         name='entry-list'
     ),
     url(r'^feed/?$', LatestEntriesFeed()),
-    url(r'^entry/(?P<pk>\d+)/?$', DetailView.as_view(
-            queryset=api.list_visible_entries(),
+    url(r'^entry/(?P<pk>\d+)/?$', EntryDetailView.as_view(
             context_object_name='entry',
         ), 
         name='entry-detail',

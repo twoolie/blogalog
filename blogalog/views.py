@@ -4,18 +4,30 @@ from django.views.generic.list import MultipleObjectMixin
 from django.contrib.sites.models import get_current_site
 from django.contrib.syndication.views import Feed
 from models import Entry
-import api
 # Create your views here.
 
 class VisibleFilterMixin(object):
     def get_queryset(self):
         #You can append a .filter to this!
-        if self.request.user.is_authenticated():
-            return super(VisibleFilterMixin,self).get_queryset()
+        try:
+            if self.request.user.is_authenticated():
+                return super(VisibleFilterMixin,self).get_queryset()
+        except AttributeError:
+            pass
         return super(VisibleFilterMixin,self).get_queryset().filter(visible=True)
 
-class EntryListView(VisibleFilterMixin, ListView):
-    pass
+class OrderFilterMixin(object):
+    def get_queryset(self):
+        return super(OrderFilterMixin,self).get_queryset().order_by('-pub_date')
+
+class EntryVisibleListView(OrderFilterMixin, VisibleFilterMixin, ListView):
+    model = Entry
+
+class EntryListView(OrderFilterMixin, ListView):
+    model = Entry
+
+class EntryDetailView(VisibleFilterMixin, DetailView):
+    model = Entry
 
 class EntryCreate(CreateView):
     model = Entry
@@ -29,7 +41,8 @@ class LatestEntriesFeed(Feed):
     description = "Work of a fulltime nerd"
 
     def items(self):
-        return api.list_entries().order_by('-pub_date')[:5]
+        return EntryVisibleListView().get_queryset()[:5]
+        #return api.list_entries().order_by('-pub_date')[:5]
 
     def item_title(self, item):
         return item.title

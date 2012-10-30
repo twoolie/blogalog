@@ -1,5 +1,7 @@
 # Django settings for django_blog project.
 
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -99,7 +101,7 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-CONTEXT_PROCESSORS = (
+TEMPLATE_CONTEXT_PROCESSORS += (
     'django.core.context_processors.request',
 )
 
