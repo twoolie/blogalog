@@ -1,0 +1,17 @@
+{% extends "blogalog/base.html" %}
+
+{% block content %}
+    {% if latest_blog_entries %}
+        {% for entry in latest_blog_entries %}
+            <h2 class="sansserif datemargin"><a href="{% url entry-detail entry.id %}">{{ entry.title }}</a></h2>
+            <p class="sansserif blogmargin">
+                {{ entry.entry|removetags:""|safe }}
+            </p>
+            <p class="sansserif datemargin" >
+                Published on: {{ entry.pub_date }}
+            </p>
+        {% endfor %}
+    {% else %}
+        <p>No entries avaliable</p>
+    {% endif %}
+{% endblock %}

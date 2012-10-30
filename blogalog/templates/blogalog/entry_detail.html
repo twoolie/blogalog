@@ -1,0 +1,19 @@
+{% extends "blogalog/base.html" %}
+
+{% block header %}
+    <h1 class="sansserif headermargin">Firstyear's Blog-a-log</h1>
+{% endblock %}
+
+{% block content %}
+    {% if entry %}
+        <h2 class="sansserif datemargin">{{ entry.title }}</h2>
+        <p class="sansserif blogmargin">
+            {{ entry.entry|removetags:""|safe }}
+        </p>
+        <p class="sansserif datemargin" >
+            Published on: {{ entry.pub_date }}
+        </p>
+    {% else %}
+        <p class=sansserif>Entry not found</p>
+    {% endif %}
+{% endblock %}

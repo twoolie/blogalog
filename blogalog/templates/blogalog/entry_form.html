@@ -1,0 +1,12 @@
+{% extends "blogalog/base.html" %}
+
+{% block content %}
+<div class="sansserif blogmargin">
+    <form action="{{ request.path_info }}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit Entry">
+    </form>
+</div>
+
+{% endblock %}
