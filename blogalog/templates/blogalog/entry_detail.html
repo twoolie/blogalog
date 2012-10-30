@@ -1,9 +1,5 @@
 {% extends "blogalog/base.html" %}
 
-{% block header %}
-    <h1 class="sansserif headermargin">Firstyear's Blog-a-log</h1>
-{% endblock %}
-
 {% block content %}
     {% if entry %}
         <h2 class="sansserif datemargin">{{ entry.title }}</h2>
@@ -13,6 +9,11 @@
         <p class="sansserif datemargin" >
             Published on: {{ entry.pub_date }}
         </p>
+        {% if perms.blogalog.add_entry %}
+            <div class="datemargin sansserif">
+            <a href="{% url entry-update entry.pk %}">Edit</a>
+            </div>
+        {% endif %}
     {% else %}
         <p class=sansserif>Entry not found</p>
     {% endif %}
