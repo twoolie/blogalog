@@ -1,0 +1,22 @@
+[
+    {
+        "pk": 1,
+        "model": "blogalog.entry",
+        "fields": {
+            "pub_date": "2012-10-30T04:19:23Z",
+            "entry": "This is a test entry",
+            "visible": true,
+            "title": "Test entry "
+        }
+    },
+    {
+        "pk": 2,
+        "model": "blogalog.entry",
+        "fields": {
+            "pub_date": "2012-10-30T08:21:44Z",
+            "entry": "This is another test post <br/>\r\n\r\n<pre>\r\nTest of pre formatting for code dumps and crap.\r\n</pre>",
+            "visible": true,
+            "title": "Another test"
+        }
+    }
+]
