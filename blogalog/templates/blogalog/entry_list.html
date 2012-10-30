@@ -1,9 +1,16 @@
 {% extends "blogalog/base.html" %}
 
 {% block content %}
+
     {% if latest_blog_entries %}
         {% for entry in latest_blog_entries %}
             <h2 class="sansserif datemargin"><a href="{% url entry-detail entry.id %}">{{ entry.title }}</a></h2>
+            {% if request.user.is_authenticated %} 
+            {# {% if perms.blogalog.add_entry %} #}
+                <p class="sansserif blogmargin">
+                    Visible: {{ entry.visible }}
+                </p>
+            {% endif %}
             <p class="sansserif blogmargin">
                 {{ entry.entry|removetags:""|safe }}
             </p>

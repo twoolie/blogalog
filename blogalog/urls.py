@@ -7,7 +7,7 @@ import api
 
 urlpatterns = patterns('blogalog.views', 
     url(r'^$', EntryListView.as_view(
-            queryset=api.list_visible_entries().order_by('-pub_date'),
+            queryset=api.list_entries().order_by('-pub_date'),
             context_object_name='latest_blog_entries',
         ), 
         name='entry-list'

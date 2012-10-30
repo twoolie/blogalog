@@ -7,12 +7,14 @@ from models import Entry
 import api
 # Create your views here.
 
-class SiteFilterMixin(object):
+class VisibleFilterMixin(object):
     def get_queryset(self):
         #You can append a .filter to this!
-        return super(SiteFilterMixin,self).get_queryset()
+        if self.request.user.is_authenticated():
+            return super(VisibleFilterMixin,self).get_queryset()
+        return super(VisibleFilterMixin,self).get_queryset().filter(visible=True)
 
-class EntryListView(SiteFilterMixin, ListView):
+class EntryListView(VisibleFilterMixin, ListView):
     pass
 
 class EntryCreate(CreateView):
