@@ -1,7 +1,4 @@
-
-from django.utils.datastructures import SortedDict
 import xmlrpclib
-
 from rpc4django.utils import CookieTransport
 
 #username = 'testuser'
@@ -19,7 +16,8 @@ print('%s' % proxy.system.listMethods() )
 print('%s' % proxy.system.login(username, password))
 
 if proxy.system.login(username, password):
-    print('%s' % proxy.blogalog.list_entries() )
+    #print('%s' % proxy.blogalog.list_entries() )
+    print('%s' % proxy.blogalog.get_entry(1) )
     #print('%s' % proxy.blogalog.update_entry(1, 'Test', 'New text') )
     proxy.system.logout()
 

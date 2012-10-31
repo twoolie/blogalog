@@ -1,5 +1,5 @@
 #This is the local API
-from views import EntryListView 
+from views import EntryListView, EntryDetailView 
 from rpc4django import rpcmethod
 
 #### I need to find a better way of dealing with this, so that perhaps the request
@@ -12,6 +12,11 @@ from rpc4django import rpcmethod
 @rpcmethod(name='blogalog.list_entries', login_required=True)
 def list_entries():
     return list(EntryListView().get_queryset())
+
+@rpcmethod(name='blogalog.get_entry', login_required=True)
+def get_entry(id=None):
+    return list(EntryListView().get_queryset().filter(pk=id))
+
 
 #@rpcmethod(name='blogalog.list_files', login_required=True)
 #def list_files():
