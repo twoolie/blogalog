@@ -1,0 +1,33 @@
+<!-- Firstyear's Blogalog, minimal implementation -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block title %}Firstyear's Blog-a-log{% endblock %}</title>
+
+  {# Stylesheets #}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/foundation.min.css" type="text/css" media="screen" />
+    {% block extra-css %}{% endblock %}
+  {# Javascript #}
+    <script src="{{ STATIC_URL }}js/modernizr.foundation.js"></script>
+    <script src="{{ STATIC_URL }}js/app.js"></script>
+    {% block extra-js %}{% endblock %}
+
+  </head>
+  <body id="{% block page-id %}{% endblock %}" class="{% block page-class %}{% endblock %}">
+    <header id="page-header">
+    {% block header %}
+      <div class="row">
+        <h1><a href="/">Firstyear's Blog-a-log</a></h1>
+      </div>
+    {% endblock header %}
+    </header>
+  <section id="page-content">
+  {% block content %}{% endblock %}
+  </section>
+  <section id="page-footer">
+      <div class="row">
+          Designed with love by William Brown.
+      </div>
+  </section>
+  </body>
+</html>

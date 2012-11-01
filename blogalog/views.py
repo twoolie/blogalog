@@ -21,9 +21,11 @@ class OrderFilterMixin(object):
         return super(OrderFilterMixin,self).get_queryset().order_by('-pub_date')
 
 class EntryVisibleListView(OrderFilterMixin, VisibleFilterMixin, ListView):
+    paginate_by = 10
     model = Entry
 
 class EntryListView(OrderFilterMixin, ListView):
+    paginate_by = 10
     model = Entry
 
 class EntryDetailView(VisibleFilterMixin, DetailView):

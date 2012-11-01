@@ -1,24 +1,23 @@
 {% extends "blogalog/base.html" %}
 
-{% block content %}
+{% block page-id %}blog-entry-list{% endblock %}
 
+{% block content %}
+    <div class="row">
     {% if latest_blog_entries %}
         {% for entry in latest_blog_entries %}
-            <h2 class="sansserif datemargin"><a href="{% url entry-detail entry.id %}">{{ entry.title }}</a></h2>
-            {% if request.user.is_authenticated %} 
+            <h2><a href="{% url entry-detail entry.id %}">{{ entry.title }}</a></h2>
+            {% if request.user.is_authenticated %}
             {# {% if perms.blogalog.add_entry %} #}
-                <p class="sansserif blogmargin">
-                    Visible: {{ entry.visible }}
-                </p>
+                <p>Visible: {{ entry.visible }}</p>
             {% endif %}
-            <p class="sansserif blogmargin">
-                {{ entry.entry|removetags:""|safe }}
-            </p>
-            <p class="sansserif datemargin" >
-                Published on: {{ entry.pub_date }}
-            </p>
+            <p>{{ entry.entry|removetags:""|safe }}</p>
+            <p>Published on: {{ entry.pub_date }}</p>
         {% endfor %}
+
+        {% include "pagination.html" %}
     {% else %}
         <p>No entries avaliable</p>
     {% endif %}
+    </div>
 {% endblock %}

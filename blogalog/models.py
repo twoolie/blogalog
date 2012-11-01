@@ -9,6 +9,9 @@ class Entry(models.Model):
     visible = models.BooleanField()
     pub_date = models.DateTimeField('Date published')
 
+    class Meta:
+        verbose_name_plural = "Entries"
+
     def __unicode__(self):
         return self.title
 

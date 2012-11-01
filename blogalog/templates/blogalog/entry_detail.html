@@ -1,20 +1,22 @@
 {% extends "blogalog/base.html" %}
 
+{% block page-id %}blog-entry-detail{% endblock %}
+
 {% block content %}
+    <div class="row">
     {% if entry %}
-        <h2 class="sansserif datemargin">{{ entry.title }}</h2>
-        <p class="sansserif blogmargin">
+        <h2><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a></h2>
+        <p>
             {{ entry.entry|removetags:""|safe }}
         </p>
-        <p class="sansserif datemargin" >
+        <p>
             Published on: {{ entry.pub_date }}
-        </p>
         {% if perms.blogalog.add_entry %}
-            <div class="datemargin sansserif">
-            <a href="{% url entry-update entry.pk %}">Edit</a>
-            </div>
+            <a href="{% url entry-update entry.pk %}" class="small radius secondary button">Edit</a>
         {% endif %}
+        </p>
     {% else %}
-        <p class=sansserif>Entry not found</p>
+        <p>Entry not found</p>
     {% endif %}
+    </div>
 {% endblock %}

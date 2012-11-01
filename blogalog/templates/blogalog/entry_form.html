@@ -1,11 +1,13 @@
 {% extends "blogalog/base.html" %}
 
+{% block page-id %}blog-entry-add{% endblock %}
+
 {% block content %}
-<div class="sansserif blogmargin">
+<div class="row">
     <form action="{{ request.path_info }}" method="POST">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="Submit Entry">
+    <input type="submit" class="button" value="Submit Entry">
     </form>
 </div>
 
